@@ -46,7 +46,7 @@ module.exports = {
         // 改变key 'js/index' 输出指定目录
         'index': "./src/entry.js",
         // vendor表示单独合并
-        vendor: ['jQuery'] //单独合并第三方库
+        vendor: ['jQuery', 'aliasAsync/alias'] //单独合并第三方库
     },
     /**
      * 输出配置
@@ -82,7 +82,7 @@ module.exports = {
          * amd Export to AMD (optionally named - set the name via the library option)
          * umd Export to AMD, CommonJS2 or as property in root 编写类库十分合适
          */
-        libraryTarget: 'umd',
+        libraryTarget: 'var',
         // 暴露到全局中的字段名
         library: 'yunVipAPI'
     },
@@ -162,7 +162,16 @@ module.exports = {
             inject: 'head'
         }),
         // 这是妮第三方库打包生成的文件
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.base.js')],
+        // 生成的common chunk文件必须在主bundle之前引用,例如
+        // <script src="http://localhost:63343/teapot/dest/vendor.base.js"></script>
+        // <script src="http://localhost:63343/teapot/dest/index-bundle.js"></script>
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.base.js',
+            minChunks: 3
+        }),
+        // 往每个文件头添加banner
+        new webpack.BannerPlugin('created by 张亚涛')],
     /**
      * 使用webpack-dev-server时 可配置此项
      */
