@@ -62,11 +62,11 @@ module.exports = someValue;
 * 因为网络请求都是异步的。所以阻塞式的调用在网路中支持的不是很好。
 * 多个模块之间并能同时并行的加载进来。
 
-> 实现
-1、[node.js](http://nodejs.org/) - server端。
-2、[browserify](https://github.com/substack/node-browserify)
-3、[modules-webmake](https://github.com/medikoo/modules-webmake)－编译到一个bundle里
-4、[wreq](https://github.com/substack/wreq)－客户端
+>* 实现
+>* 1、[node.js](http://nodejs.org/) - server端。
+>* 2、[browserify](https://github.com/substack/node-browserify)
+>* 3、[modules-webmake](https://github.com/medikoo/modules-webmake)－编译到一个bundle里
+>* 4、[wreq](https://github.com/substack/wreq)－客户端
 
 #### AMD：异步的require
 `Asynchronous Module Definition`
@@ -116,9 +116,9 @@ module "localModule" {}
 
 ### 模块的传输方式
 模块是应该在client端被执行的，所以这就需要它们通过http协议让server端向浏览器端传输。
-> 现在有两种方式来处理如何传输模块
-1、一个请求一个模块。
-2、所有的模块都在一个请求里。
+>* 现在有两种方式来处理如何传输模块
+>* 1、一个请求一个模块。
+>* 2、所有的模块都在一个请求里。
 
 这两种方式都有人在用，不过这两种都是次优的：
 
